@@ -8,6 +8,7 @@
       </tr>
     </thead>
     <tbody>
+        
       <tr v-for="(todo, index) in todos" v-bind:key="index">
         <td><input type="checkbox" v-model="todo.checked" /></td>
         <th scope="row">{{ index + 1 }}</th>

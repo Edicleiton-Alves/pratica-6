@@ -1,11 +1,13 @@
 import {
-    createWebHashHistory,
+    createWebHistory,
+    // createWebHashHistory,
     createRouter,
   } from "vue-router";
-  import Initial from "../views/Initial.vue";
-  import Login from "../views/Login.vue";
+  import Initial from "@/views/Initial.vue";
+  import Login from "@/views/Login.vue";
+  import NotFound from "@/views/NotFound.vue";
   
-  const routers = [
+  const routes = [
     {
       path: "/",
       name: "Login",
@@ -16,11 +18,12 @@ import {
       name: "Initial",
       component: Initial,
     },
+    { path: "/:pathMatch(.*)*", name: "not-found", component: NotFound },
   ];
   
   const router = createRouter({
-    history: createWebHashHistory(),
-    routers,
+    history: createWebHistory(),
+    routes,
   });
   
   export default router;
