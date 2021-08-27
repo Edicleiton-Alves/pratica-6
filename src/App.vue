@@ -1,26 +1,36 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div id="nav">
+    <router-link to="/">Login</router-link>
+    <router-link v-if="logged" to="/initial"> | Home</router-link>
+    <a v-if="logged" href="#" @click="logout"> | Logout</a>
+  </div>
+  <router-view />
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import axios from "axios";
 export default {
-  name: 'App',
-  components: {
-    HelloWorld
-  }
-}
+  name: "Login",
+  data() {
+    return {
+      logged: false,
+    };
+  },
+  methods: {
+    logout() {
+      axios.get("http://localhost:3000/users/login").then((result) => {
+        this.logged = false;
+        localStorage.removeItem("user");
+        console.log(result);
+      });
+    },
+  },
+  created() {
+    if (localStorage.getItem("user")) {
+      this.logged = true;
+    }
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
+<style></style>
